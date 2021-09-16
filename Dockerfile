@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y
 WORKDIR /marketplace
 
 COPY ./polkadot_api_dotnet ./polkadot_api_dotnet
-COPY ./src ./src
+COPY . .
 
 RUN dotnet publish ./Marketplace.Backend.csproj -c Debug -o ./publish
 
