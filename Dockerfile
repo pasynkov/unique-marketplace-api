@@ -4,9 +4,9 @@ RUN apt-get update && apt-get install -y
 WORKDIR /marketplace
 
 COPY ./polkadot_api_dotnet ./polkadot_api_dotnet
-COPY . .
+COPY ./src ./src
 
-RUN dotnet publish ./Marketplace.Backend.csproj -c Debug -o ./publish
+RUN dotnet publish ./src/Marketplace.Backend/Marketplace.Backend.csproj -c Debug -o ./publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 RUN apt-get update && apt-get install -y
