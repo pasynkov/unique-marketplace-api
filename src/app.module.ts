@@ -4,6 +4,8 @@ import { MarketplacePgRepository } from "@unique-network/unique-migrations-seeds
 import config from './config';
 import { OffersController } from './offers/offers.controller';
 import { OffersService } from './offers/offers.service';
+import { TradesController } from './trades/trades.controller';
+import { TradesService } from './trades/trades.service';
 
 @Module({
   imports: [
@@ -23,9 +25,13 @@ import { OffersService } from './offers/offers.service';
       useFactory: () => ({})
     })
   ],
-  controllers: [OffersController],
+  controllers: [
+    OffersController,
+    TradesController
+  ],
   providers: [
     OffersService,
+    TradesService
   ],
 })
 export class AppModule {}

@@ -9,10 +9,10 @@ import { OffersService } from './offers.service';
 
 @Controller('Offers')
 export class OffersController {
-  constructor(private readonly appService: OffersService) {}
+  constructor(private readonly offersService: OffersService) {}
 
   @Get()
   get(@Query() pagination: PaginationRequest, @Query(ParseOffersFilterPipe) offersFilter: OffersFilter, @Query() sort: SortingRequest): Promise<PaginationResult<OfferDto>> {
-    return this.appService.get(pagination, offersFilter, sort);
+    return this.offersService.get(pagination, offersFilter, sort);
   }
 }
