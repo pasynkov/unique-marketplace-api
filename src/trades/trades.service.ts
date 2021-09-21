@@ -52,12 +52,12 @@ export class TradesService {
     return {
       buyer: trade.buyer && encodeAddress(Buffer.from(trade.buyer, 'base64')),
       seller: trade.offer.seller && encodeAddress(Buffer.from(trade.offer.seller, 'base64')),
-      collectionId: trade.offer.collectionId,
+      collectionId: +trade.offer.collectionId,
       creationDate: trade.offer.creationDate,
       metadata: trade.offer.metadata,
       price: trade.offer.price?.toString(),
-      quoteId: trade.offer.quoteId,
-      tokenId: trade.offer.tokenId,
+      quoteId: +trade.offer.quoteId,
+      tokenId: +trade.offer.tokenId,
       tradeDate: trade.tradeDate
     }
   }

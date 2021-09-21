@@ -4,6 +4,8 @@ import { MarketplacePgRepository } from "@unique-network/unique-migrations-seeds
 import config from './config';
 import { OffersController } from './offers/offers.controller';
 import { OffersService } from './offers/offers.service';
+import { OnHoldController } from './on-hold/on-hold.controller';
+import { OnHoldService } from './on-hold/on-hold.service';
 import { TradesController } from './trades/trades.controller';
 import { TradesService } from './trades/trades.service';
 
@@ -27,11 +29,13 @@ import { TradesService } from './trades/trades.service';
   ],
   controllers: [
     OffersController,
-    TradesController
+    TradesController,
+    OnHoldController
   ],
   providers: [
     OffersService,
-    TradesService
+    TradesService,
+    OnHoldService
   ],
 })
 export class AppModule {}

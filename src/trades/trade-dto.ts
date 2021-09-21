@@ -1,8 +1,8 @@
 export interface TradeDto {
-  collectionId: string;
-  tokenId: string;
+  collectionId: number;
+  tokenId: number;
   price: string;
-  quoteId: string;
+  quoteId: number;
   seller: string;
   metadata: object | null;
   creationDate: Date;

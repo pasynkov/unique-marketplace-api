@@ -4,10 +4,10 @@ import { ClassToDto } from "src/type-generators/class-to-dto";
 
 export class PaginationRequest
 {
-  @ApiProperty({required: false})
+  @ApiProperty({required: false, type:'integer'})
   public page?: number;
 
-  @ApiProperty({required: false})
+  @ApiProperty({required: false, type:'integer'})
   public pageSize?: number;
 
   constructor(value: ClassToDto<PaginationRequest>) {

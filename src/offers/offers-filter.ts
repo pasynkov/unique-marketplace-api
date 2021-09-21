@@ -4,7 +4,7 @@ import { ClassToDto } from "src/type-generators/class-to-dto";
 
 export class OffersFilter
 {
-  @ApiProperty({name: 'collectionId', items: { type: 'number', default: '' }, required: false})
+  @ApiProperty({name: 'collectionId', items: { type: 'integer', default: '' }, required: false, type: 'array', isArray: true})
   public collectionId?: number[];
 
   @ApiProperty({required: false, type: String})
@@ -16,7 +16,7 @@ export class OffersFilter
   @ApiProperty({required: false})
   public seller?: string;
 
-  @ApiProperty({items: {type: 'number', default: ''}, required: false})
+  @ApiProperty({name: 'traitsCount', items: {type: 'integer', default: ''}, required: false, type: 'array', isArray: true})
   public traitsCount?: number[];
 
   @ApiProperty({required: false})

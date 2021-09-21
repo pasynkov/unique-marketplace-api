@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ParsePaginationRequestPipe } from './pagination/parse-pagination-request.pipe';
 import { ParseSortingRequestPipe } from './sorting/sorting-request.pipe';
+import { equalsIgnoreCase } from './string/equals-ignore-case';
 
 function useSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
@@ -20,12 +21,23 @@ function useGlobalPipes(app: INestApplication) {
   app.useGlobalPipes(new ParseSortingRequestPipe());
 }
 
+function ignoreQueryCase(app: INestApplication) {
+  app.use((req: any, res: any, next: any) => {
+    req.query = new Proxy(req.query, {
+      get: (target, name) => target[Object.keys(target)
+        .find(key => equalsIgnoreCase(key, name.toString())) ?? name]
+    })
+
+    next();
+  });}
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   useSwagger(app);
+  ignoreQueryCase(app);
   useGlobalPipes(app);
 
-  await app.listen(3000);
+  await app.listen(5000);
 }
 bootstrap();

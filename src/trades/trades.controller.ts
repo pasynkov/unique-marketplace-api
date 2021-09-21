@@ -1,9 +1,9 @@
-import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiQuery } from '@nestjs/swagger';
+import { queryArray } from 'src/decorators/query-array.decorator';
 import { PaginationRequest } from 'src/pagination/pagination-request';
 import { PaginationResult } from 'src/pagination/pagination-result';
-import { parseIntRequest } from 'src/parsers/parse-int-request';
-import { requestArray } from 'src/parsers/request-array';
+import { parseCollectionIdRequest } from 'src/parsers/parse-collection-id-request';
 import { QueryParamArray } from 'src/query-param-array';
 import { TradeDto } from './trade-dto';
 import { TradesService } from './trades.service';
@@ -13,43 +13,15 @@ import { TradesService } from './trades.service';
 export class TradesController {
   constructor(private readonly tradesService: TradesService) {}
 
-  parseCollectionId(collectionId: QueryParamArray): number[] {
-    return requestArray(collectionId)
-    .map(v => parseIntRequest(v, () => { throw new BadRequestException({}, `Failed to parse integer value from ${v}`)}))
-    .filter(v => v != null) as number[];
-  }
-
-  @ApiQuery({
-    name: 'collectionId',
-    required: false,
-    isArray: true,
-    schema: {
-      items: {
-        type: 'number',
-        default: ''
-      },
-      type: 'array'
-    }
-  })
+  @ApiQuery(queryArray('collectionId', 'integer'))
   @Get()
   get(@Query() pagination: PaginationRequest, @Query('collectionId') collectionId?: QueryParamArray): Promise<PaginationResult<TradeDto>> {
-    return this.tradesService.get(this.parseCollectionId(collectionId), undefined, pagination);
+    return this.tradesService.get(parseCollectionIdRequest(collectionId), undefined, pagination);
   }
 
-  @ApiQuery({
-    name: 'collectionId',
-    required: false,
-    isArray: true,
-    schema: {
-      items: {
-        type: 'number',
-        default: ''
-      },
-      type: 'array'
-    }
-  })
+  @ApiQuery(queryArray('collectionId', 'integer'))
   @Get(':seller')
   getBySeller(@Param('seller') seller: string, @Query() pagination: PaginationRequest, @Query('collectionId') collectionId?: QueryParamArray): Promise<PaginationResult<TradeDto>> {
-    return this.tradesService.get(this.parseCollectionId(collectionId), seller, pagination);
+    return this.tradesService.get(parseCollectionIdRequest(collectionId), seller, pagination);
   }
 }

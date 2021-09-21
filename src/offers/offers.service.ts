@@ -114,10 +114,10 @@ export class OffersService {
 
   mapToDto(offer: Offer): OfferDto {
     return {
-      collectionId: offer.collectionId,
-      tokenId: offer.tokenId,
+      collectionId: +offer.collectionId,
+      tokenId: +offer.tokenId,
       price: offer.price.toString(),
-      quoteId: offer.quoteId,
+      quoteId: +offer.quoteId,
       seller: offer.seller && encodeAddress(Buffer.from(offer.seller, 'base64')),
       metadata: offer.metadata,
       creationDate: offer.creationDate
@@ -125,7 +125,8 @@ export class OffersService {
   }
 
   async get(pagination: PaginationRequest, offersFilter: OffersFilter, sort: SortingRequest): Promise<PaginationResult<OfferDto>> {
-    let offers = this.connection.manager.createQueryBuilder(Offer, 'offer');
+    let offers = this.connection.manager.createQueryBuilder(Offer, 'offer')
+      .where('offer.OfferStatus = 1');
     offers = this.filter(offers, offersFilter);
 
     offers = this.applySort(offers, sort);

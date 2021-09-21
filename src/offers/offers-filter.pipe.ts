@@ -1,6 +1,7 @@
 import { ArgumentMetadata, HttpStatus, Injectable, Optional, PipeTransform } from "@nestjs/common";
 import { ErrorHttpStatusCode, HttpErrorByCode } from "@nestjs/common/utils/http-error-by-code.util";
 import { parseBigIntRequest } from "src/parsers/parse-big-int-request";
+import { parseCollectionIdRequest } from "src/parsers/parse-collection-id-request";
 import { parseIntRequest } from "src/parsers/parse-int-request";
 import { requestArray } from "src/parsers/request-array";
 import { TransformationResult } from "src/type-generators/transformation-result";
@@ -33,9 +34,7 @@ export class ParseOffersFilterPipe implements PipeTransform<any, TransformationR
     }
 
     return new OffersFilter({
-      collectionId: requestArray(value.collectionId)
-        .map(id => parseIntRequest(id, () => {throw this.exceptionFactory(`Failed to parse collection ids. Expected an array of integers, got ${JSON.stringify(value.collectionId)}`);}))
-        .filter(id => id != null) as number[],
+      collectionId: parseCollectionIdRequest(value.collectionId),
       maxPrice: parseBigIntRequest(value.maxPrice, () => {throw this.exceptionFactory(`Failed to parse maxPrice. Expected a big integer value, got ${value.maxPrice}`)}),
       minPrice: parseBigIntRequest(value.minPrice, () => {throw this.exceptionFactory(`Failed to parse minPrice. Expected a big integer value, got ${value.minPrice}`)}),
       searchLocale: value.searchLocale,
