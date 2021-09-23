@@ -1,4 +1,0 @@
-[submodule "polkadot_api_dotnet"]
-	path = polkadot_api_dotnet
-	url = https://github.com/usetech-llc/polkadot_api_dotnet.git
-	branch = develop
