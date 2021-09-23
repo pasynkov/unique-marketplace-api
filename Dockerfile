@@ -15,4 +15,6 @@ WORKDIR /marketplace
 
 COPY --from=build-env /marketplace/publish .
 
+EXPOSE 5000
+
 CMD ["dotnet", "Marketplace.Backend.dll"]
