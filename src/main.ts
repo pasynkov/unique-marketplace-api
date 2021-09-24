@@ -33,7 +33,9 @@ function ignoreQueryCase(app: INestApplication) {
   });}
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: false });
+  const app = await NestFactory.create(AppModule);
+
+  app.enableCors();
 
   useSwagger(app);
   ignoreQueryCase(app);
