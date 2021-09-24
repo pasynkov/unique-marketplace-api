@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { ParsePaginationRequestPipe } from './pagination/parse-pagination-request.pipe';
 import { ParseSortingRequestPipe } from './sorting/sorting-request.pipe';
 import { equalsIgnoreCase } from './string/equals-ignore-case';
+import config from './config';
 
 function useSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
@@ -38,6 +39,6 @@ async function bootstrap() {
   ignoreQueryCase(app);
   useGlobalPipes(app);
 
-  await app.listen(5000);
+  await app.listen(config.listenPort);
 }
 bootstrap();

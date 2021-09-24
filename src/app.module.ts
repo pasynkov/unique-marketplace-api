@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MarketplacePgRepository } from "@unique-network/unique-migrations-seeds"
+import { MarketplacePgRepository } from "../unique-migrations-seeds/src";
 import config from './config';
 import { OffersController } from './offers/offers.controller';
 import { OffersService } from './offers/offers.service';
@@ -20,7 +20,7 @@ import { TradesService } from './trades/trades.service';
           password: config.dbPassword,
           database: config.dbName,
           logger: "advanced-console",
-          logging: "all"
+          logging: ["warn", "error", "info", "log"]
         });
         return repository.connect();
       },

@@ -8,7 +8,7 @@ import { equalsIgnoreCase } from 'src/string/equals-ignore-case';
 import { Connection, SelectQueryBuilder } from 'typeorm';
 import { OfferDto } from './offer-dto';
 import { OffersFilter } from './offers-filter';
-import { Offer, priceTransformer, TokenTextSearch } from '@unique-network/unique-migrations-seeds';
+import { Offer, priceTransformer, TokenTextSearch } from '../../unique-migrations-seeds/src';
 import { nullOrWhitespace } from 'src/string/null-or-white-space';
 import {decodeAddress, encodeAddress} from "@polkadot/util-crypto";
 

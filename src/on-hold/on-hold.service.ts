@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Connection, SelectQueryBuilder } from 'typeorm';
-import { NftIncomingTransaction, Offer, Trade } from '@unique-network/unique-migrations-seeds';
+import { NftIncomingTransaction, Offer, Trade } from '../../unique-migrations-seeds/src';
 import { nullOrWhitespace } from 'src/string/null-or-white-space';
 import {decodeAddress, encodeAddress} from "@polkadot/util-crypto";
 import { PaginationRequest } from 'src/pagination/pagination-request';
