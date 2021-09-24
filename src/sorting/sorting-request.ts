@@ -6,7 +6,7 @@ import { SortingParameter } from "./sorting-parameter";
 export class SortingRequest
 {
   @ApiProperty({
-    items:{ type: 'string', default: '' },
+    items:{ type: 'string', default: 'desc(CreationDate)' },
     description: 'Possible values: asc(Price), desc(Price), asc(TokenId), desc(TokenId), asc(CreationDate), desc(CreationDate).',
     required: false
   })
