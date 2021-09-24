@@ -1,3 +1,6 @@
 # Unique Marketplace API
 
-Backend project for unique marketplace.
+## How to run
+
+`yarn install & yarn run start`
+
