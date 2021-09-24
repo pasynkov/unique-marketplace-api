@@ -4,7 +4,10 @@ WORKDIR /src
 
 COPY . .
 
-RUN git submodule update --init --recursive && yarn install
+RUN ls 
+RUN git submodule update --init --recursive
+RUN cd unique-migrations-seeds
+RUN yarn install
 
 EXPOSE 5000
 
