@@ -6,7 +6,7 @@ export async function paginate<T>(query: SelectQueryBuilder<T>, parameter: Pagin
   const page = parameter.page ?? 1;
   const pageSize = parameter.pageSize ?? 10;
   const [items, itemsCount] = await Promise.all([
-    query.skip((page - 1) * pageSize).limit(pageSize).getMany(),
+    query.skip((page - 1) * pageSize).take(pageSize).getMany(),
     query.getCount()]
   );
 
